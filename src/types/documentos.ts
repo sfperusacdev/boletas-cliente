@@ -1,4 +1,6 @@
 export interface DocumentoDto {
+  empresa_codigo?: string;
+  empresa_descripcion?: string;
   codigo_proceso: string;
   descripcion_proceso: string;
   codigo_trabajador: string;

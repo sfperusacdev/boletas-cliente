@@ -24,6 +24,10 @@ const mesMap: { [key: string]: string } = {
 
 const columns = buildTableColumns<DocumentoDto>((helper) => {
   return [
+    helper.accessor("empresa_descripcion", {
+      header: "Empresa",
+      cell: ({ getValue }) => getValue(),
+    }),
     helper.accessor("descripcion_proceso", {
       header: "Descripción del Proceso",
       cell: ({ getValue }) => getValue(),
