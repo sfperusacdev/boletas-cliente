@@ -111,11 +111,11 @@ export const DocumentosPage: FC<{ tosign?: boolean }> = ({ tosign }) => {
           {
             label: "Ver Documeto",
             onClick: () => {
-              if (row.signed_pdf_name != null) {
+              if (row.signed_pdf_name) {
                 navigate(`/dashboard/pdf/${row.signed_pdf_name}/${row.estado}`);
                 return;
               }
-              if (row.nombre_pdf != null) {
+              if (row.nombre_pdf) {
                 navigate(`/dashboard/pdf/${row.nombre_pdf}/${row.estado}`);
                 return;
               }
@@ -123,11 +123,11 @@ export const DocumentosPage: FC<{ tosign?: boolean }> = ({ tosign }) => {
           },
         ]}
         onRowDoubleClick={(row) => {
-          if (row.signed_pdf_name != null) {
+          if (row.signed_pdf_name) {
             navigate(`/dashboard/pdf/${row.signed_pdf_name}/${row.estado}`);
             return;
           }
-          if (row.nombre_pdf != null) {
+          if (row.nombre_pdf) {
             navigate(`/dashboard/pdf/${row.nombre_pdf}/${row.estado}`);
             return;
           }
