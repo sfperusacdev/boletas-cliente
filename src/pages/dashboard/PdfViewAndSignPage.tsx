@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { DocumentosService } from "../../services/envio_documentos";
-import { useNavigate, useParams } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { use100vh } from "react-div-100vh";
 import { CircleArrowLeft, PencilLine, ZoomIn, ZoomOut } from "lucide-react";
 import { Document, Page } from "react-pdf";
@@ -11,6 +11,7 @@ import { useConfirmModal } from "../../hooks/useConfirmModal";
 import toast from "react-hot-toast";
 
 export const PdfViewAndSignPage = () => {
+  const location = useLocation();
   const { openModal } = useConfirmModal();
   const { isMobile } = useScreenSize();
   let height = use100vh();
@@ -79,7 +80,17 @@ export const PdfViewAndSignPage = () => {
   return (
     <div className={classNames("w-full relative bg-base-100")} style={{ height: isMobile ? height - 72 : height }}>
       <div className="absolute bg-black/20 w-full h-10 top-0 flex justify-between items-center px-4 z-10">
-        <CircleArrowLeft className="w-5 h-5 cursor-pointer select-none" onClick={() => navigate(-1)} />
+        <CircleArrowLeft
+          className="w-5 h-5 cursor-pointer select-none"
+          onClick={() => {
+            console.log(location.state);
+            if (location.state.from === "_link") {
+              navigate("/dashboard", { replace: true });
+              return;
+            }
+            navigate(-1);
+          }}
+        />
         <div className="flex items-center gap-2">
           <button className="btn btn-sm btn-ghost" onClick={() => setScale((prev) => Math.min(prev + 0.1, 3))}>
             <ZoomIn className="w-5 h-5" />

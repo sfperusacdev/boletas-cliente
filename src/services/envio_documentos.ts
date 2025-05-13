@@ -1,7 +1,13 @@
 import { download, get } from "../lib/http";
-import { DocumentoDto } from "../types/documentos";
+import { BasicUsuarioDocumentoDto, DocumentoDto } from "../types/documentos";
 
 export const DocumentosService = {
+  getDocumentoResumen: async (empresa: string, codigo: string, signal: AbortSignal) => {
+    return get<BasicUsuarioDocumentoDto[]>({
+      path: `/api/v1/public/documentos/${empresa}/${codigo}`,
+      abortSignal: signal,
+    });
+  },
   getDocumentos: async (signal: AbortSignal) => {
     return get<DocumentoDto[]>({
       path: "/api/v1/public/documentos",

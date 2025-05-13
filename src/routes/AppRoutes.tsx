@@ -1,4 +1,4 @@
-import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
+import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
 import { ReactNode } from "react";
 import { useSession } from "../hooks/useSession";
 import { LoginPage } from "../pages/LoginPage";
@@ -9,20 +9,27 @@ import { DashboardProfile } from "../pages/dashboard/ProfilePage";
 import { PdfViewAndSignPage } from "../pages/dashboard/PdfViewAndSignPage";
 import Sample from "../pages/Sample";
 import { DocumentosPage } from "../pages/dashboard/DocumentosPage";
+import { EntryPointRedirectLink } from "../pages/EntryPointRedirectLink";
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
+  const location = useLocation();
   const { user } = useSession();
   const isAuthenticated = !!user;
-
-  return isAuthenticated ? children : <Navigate to="/login" replace />;
+  let state = undefined;
+  if (location.pathname.startsWith("/_sign/")) {
+    state = { from: location.pathname };
+  }
+  return isAuthenticated ? children : <Navigate to="/login" replace state={state} />;
 };
 
 const PublicRoute = ({ children }: { children: ReactNode }) => {
   const { user } = useSession();
   const isAuthenticated = !!user;
-
+  const location = useLocation();
   // Si el usuario está autenticado, redirigimos a la página de dashboard
-  return !isAuthenticated ? children : <Navigate to="/dashboard" replace />;
+  if (!isAuthenticated) return children;
+  if (location.state.from) return <Navigate to={location.state.from} replace />;
+  return <Navigate to="/dashboard" replace />;
 };
 
 export const AppRoutes = () => {
@@ -56,6 +63,14 @@ export const AppRoutes = () => {
         />
 
         {/* Rutas privadas (dashboard) */}
+        <Route
+          path="/_sign/:empresa/:record_codigo/:origin"
+          element={
+            <PrivateRoute>
+              <EntryPointRedirectLink />
+            </PrivateRoute>
+          }
+        />
         <Route
           path="/dashboard"
           element={

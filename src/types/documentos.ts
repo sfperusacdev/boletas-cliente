@@ -13,3 +13,10 @@ export interface DocumentoDto {
   signature_timestamp?: string;
   created_at?: string;
 }
+
+export interface BasicUsuarioDocumentoDto {
+  codigo_proceso: string;
+  estado?: string;
+  nombre_pdf?: string;
+  signed_pdf_name?: string;
+}
