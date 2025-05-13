@@ -2,13 +2,14 @@ import { useEffect, useRef, useState } from "react";
 import { DocumentosService } from "../../services/envio_documentos";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { use100vh } from "react-div-100vh";
-import { CircleArrowLeft, PencilLine, ZoomIn, ZoomOut } from "lucide-react";
+import { ArrowDownToLine, CircleArrowLeft, PencilLine, ZoomIn, ZoomOut } from "lucide-react";
 import { Document, Page } from "react-pdf";
 import { useScreenSize } from "../../hooks/useScreenSize";
 import { useMutation } from "@tanstack/react-query";
 import classNames from "classnames";
 import { useConfirmModal } from "../../hooks/useConfirmModal";
 import toast from "react-hot-toast";
+import { saveBlob } from "../../utils/blob";
 
 export const PdfViewAndSignPage = () => {
   const location = useLocation();
@@ -91,7 +92,12 @@ export const PdfViewAndSignPage = () => {
             navigate(-1);
           }}
         />
+
         <div className="flex items-center gap-2">
+          <button className="btn btn-sm btn-ghost" onClick={() => saveBlob(pdfFile.name, pdfFile)}>
+            <ArrowDownToLine className="w-5 h-5" />
+          </button>
+          <div className="w-2" />
           <button className="btn btn-sm btn-ghost" onClick={() => setScale((prev) => Math.min(prev + 0.1, 3))}>
             <ZoomIn className="w-5 h-5" />
           </button>
