@@ -75,7 +75,7 @@ export const LoginPage = () => {
           </div>
 
           <button type="submit" className="btn btn-primary btn-block" disabled={form.formState.isSubmitting}>
-            {form.formState.isSubmitting ? "Entrando..." : "Entrar"}
+            {mutation.isPending ? "Iniciando..." : "Iniciar"}
           </button>
         </form>
 

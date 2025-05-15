@@ -31,6 +31,8 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
 
   const login = (userData: UserSession) => {
     setUser(userData);
+    const currentDate = new Date();
+    localStorage.setItem("last_token_used", currentDate.toISOString());
     localStorage.setItem("session", JSON.stringify(userData));
   };
 

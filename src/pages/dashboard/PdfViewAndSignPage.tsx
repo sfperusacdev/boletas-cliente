@@ -85,7 +85,7 @@ export const PdfViewAndSignPage = () => {
           className="w-5 h-5 cursor-pointer select-none"
           onClick={() => {
             console.log(location.state);
-            if (location.state.from === "_link") {
+            if (location.state?.from === "_link") {
               navigate("/dashboard", { replace: true });
               return;
             }
