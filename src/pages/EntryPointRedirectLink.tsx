@@ -1,5 +1,5 @@
 import { Navigate, useParams } from "react-router-dom";
-import { FC, useMemo } from "react";
+import { FC, useEffect, useMemo, useRef } from "react";
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { DocumentosService } from "../services/envio_documentos";
 
@@ -12,6 +12,28 @@ export const EntryPointRedirectLink = () => {
 };
 
 const EntryPointRedirect: FC<QryPrms> = ({ empresa, origin, record_codigo }) => {
+  // region log
+  const logdone = useRef(false);
+  useEffect(() => {
+    if (logdone.current) return;
+    const logOpenLink = async () => {
+      try {
+        await DocumentosService.logOpenLink({
+          codigo: record_codigo,
+          empresa,
+          metodo: origin,
+          referencia: window.location.href,
+        });
+      } catch (error) {
+        console.error("Failed to log open link:", error);
+      } finally {
+        logdone.current = true;
+      }
+    };
+    logOpenLink();
+  }, [empresa, origin, record_codigo]);
+
+  // region data
   const queryKey = useMemo(
     () => ["RESUMEN_INFO_DOC_RECORD", empresa, origin, record_codigo],
     [empresa, origin, record_codigo]
