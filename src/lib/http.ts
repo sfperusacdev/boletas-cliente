@@ -62,6 +62,14 @@ export const download = async <B>(options: {
       ...(options.body ? { body: JSON.stringify(options.body) } : {}),
       signal: options.abortSignal,
     });
+
+    if (!response.ok) {
+      const decoded = await response.json();
+      const message = typeof decoded?.message === "string" ? decoded.message : "Unexpected error";
+      // if (message.includes("[close]")) emmitCloseSession(); // TODO
+      throw new ApiError(message);
+    }
+
     const body = response.body;
     if (!body) throw new ApiError("Archivo no encontrado");
     const reader = body.getReader();
@@ -96,3 +104,26 @@ export const patch = <T, B = unknown>(options: Omit<RequestOptions<B>, "method">
 
 export const del = <T>(options: Omit<RequestOptions, "method" | "body">) =>
   request<T>({ ...options, method: "DELETE" });
+
+// region FormData
+
+export const postFromData = async ({
+  baseUrl,
+  path,
+  body,
+  method = "POST",
+  abortSignal,
+}: Omit<RequestOptions, "method"> & { body: FormData; method?: "POST" | "PUT" }): Promise<unknown> => {
+  const response = await customFetch(joinUrls(baseUrl ?? API_BOLETAS_URL, path), {
+    method,
+    body,
+    signal: abortSignal,
+  });
+
+  const decoded = await response.json();
+  if (!response.ok) {
+    const message = decoded.message as string;
+    throw new ApiError(message);
+  }
+  return decoded.data;
+};

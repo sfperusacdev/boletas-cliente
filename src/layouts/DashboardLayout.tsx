@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { Home, CheckSquare, UserCog, LogOut, User, Menu } from "lucide-react";
+import { Home, CheckSquare, UserCog, LogOut, User, Menu, Signature } from "lucide-react";
 import { useSession } from "../hooks/useSession";
 import { useConfirmModal } from "../hooks/useConfirmModal";
 import { useScreenSize } from "../hooks/useScreenSize";
@@ -67,6 +67,15 @@ export const DashboardLayout = () => {
               }`}
             >
               <CheckSquare className="w-5 h-5 mr-2" /> <span className="text-start">Documentos por Firmar</span>
+            </Link>
+            <Link
+              to="/dashboard/signature"
+              onClick={handleLinkClick}
+              className={`btn btn-ghost justify-start w-full ${
+                location.pathname === "/dashboard/signature" ? "btn-active" : ""
+              }`}
+            >
+              <Signature className="w-5 h-5 mr-2" /> Firma
             </Link>
             <Link
               to="/dashboard/perfil"

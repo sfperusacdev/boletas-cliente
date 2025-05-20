@@ -10,6 +10,7 @@ import { PdfViewAndSignPage } from "../pages/dashboard/PdfViewAndSignPage";
 import Sample from "../pages/Sample";
 import { DocumentosPage } from "../pages/dashboard/DocumentosPage";
 import { EntryPointRedirectLink } from "../pages/EntryPointRedirectLink";
+import { SignatureImport } from "../pages/dashboard/SignatureImport";
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
@@ -84,6 +85,7 @@ export const AppRoutes = () => {
           <Route path="pdf/:pdfname/:estado" element={<PdfViewAndSignPage />} />
           <Route path="documentos/firmar" element={<DocumentosPage tosign />} />
           <Route path="perfil" element={<DashboardProfile />} />
+          <Route path="signature" element={<SignatureImport />} />
           <Route path="sample" element={<Sample />} />
         </Route>
 

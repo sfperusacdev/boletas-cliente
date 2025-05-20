@@ -24,6 +24,7 @@
     "react": "^19.0.0",
     "react-div-100vh": "^0.7.0",
     "react-dom": "^19.0.0",
+    "react-easy-crop": "^5.4.1",
     "react-hook-form": "^7.56.1",
     "react-hot-toast": "^2.5.2",
     "react-pdf": "^9.2.1",
