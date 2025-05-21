@@ -29,6 +29,7 @@ export const SignatureImport = () => {
           }
         }
       }
+      setLoading(false);
     }
   };
 
