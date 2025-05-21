@@ -20,7 +20,6 @@ const PrivateRoute = ({ children }: { children: ReactNode }) => {
   if (location.pathname.startsWith("/_sign/")) {
     state = { from: location.pathname };
   }
-  console.log(user);
   return isAuthenticated ? children : <Navigate to="/login" replace state={state} />;
 };
 

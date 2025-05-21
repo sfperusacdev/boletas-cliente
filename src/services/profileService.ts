@@ -16,7 +16,6 @@ type RequestUpdateDto = {
 
 export const profileService = {
   updateProfile: async (data: RequestUpdateDto): Promise<void> => {
-    console.log(data);
     return await put({
       baseUrl: API_IDENTITY_URL,
       path: "/v1/global/users/session",
