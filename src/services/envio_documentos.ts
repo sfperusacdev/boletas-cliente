@@ -21,7 +21,7 @@ export const DocumentosService = {
     });
   },
   signPDF: async (pdfname: string) => {
-    return get<DocumentoDto[]>({
+    return get<{ signed_pdf_name: string }>({
       path: `/api/v1/public/sign/documento/${pdfname}`,
     });
   },

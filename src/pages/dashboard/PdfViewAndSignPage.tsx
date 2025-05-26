@@ -19,8 +19,10 @@ export const PdfViewAndSignPage = () => {
   height ??= window.innerHeight;
 
   const navigate = useNavigate();
-  const { pdfname, estado } = useParams<{ pdfname: string; estado: string }>();
+  const { pdfname: pdfnamePath, estado } = useParams<{ pdfname: string; estado: string }>();
+
   const [pendiente, setDocumentoPendiente] = useState(estado === "published");
+  const [pdfname, setPdfName] = useState(pdfnamePath);
 
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<Error | string | null>(null);
@@ -31,9 +33,12 @@ export const PdfViewAndSignPage = () => {
 
   const mutation = useMutation({
     mutationFn: DocumentosService.signPDF,
-    onSuccess: () => {
+    onSuccess: ({ signed_pdf_name }) => {
       toast.success("Documento firmado correctamente.");
       setDocumentoPendiente(false);
+      navigate(`/dashboard/pdf/${signed_pdf_name}/signed`, { replace: true });
+      setPdfName(signed_pdf_name);
+      done.current = false;
     },
     onError: (err) => toast.error(`Error al firmar el documento: ${err.message}`),
   });
@@ -70,6 +75,7 @@ export const PdfViewAndSignPage = () => {
   }, [pdfname]);
 
   if (loading) return <div className="flex items-center justify-center h-screen">Loading...</div>;
+
   if (error != null)
     return (
       <div className="flex items-center justify-center h-screen text-red-500">

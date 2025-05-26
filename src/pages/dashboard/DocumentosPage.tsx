@@ -92,7 +92,7 @@ const columns = buildTableColumns<DocumentoDto>((helper) => {
 
 export const DocumentosPage: FC<{ tosign?: boolean }> = ({ tosign }) => {
   const navigate = useNavigate();
-  const { documentos, isFetching, error, refresh } = useDocumentos();
+  const { documentos, isFetching, error, refresh } = useDocumentos(tosign ? "01" : "02");
 
   const data = useMemo(() => {
     if (tosign) return documentos.filter((d) => d.estado == "published");
