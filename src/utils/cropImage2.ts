@@ -47,6 +47,8 @@ export async function getCroppedImg(
   const { width: bBoxWidth, height: bBoxHeight } = rotateSize(image.width, image.height, rotation);
   canvas.width = bBoxWidth;
   canvas.height = bBoxHeight;
+  ctx.fillStyle = "#fff";
+  ctx.fillRect(0, 0, canvas.width, canvas.height);
 
   ctx.translate(bBoxWidth / 2, bBoxHeight / 2);
   ctx.rotate(rotRad);
@@ -60,6 +62,8 @@ export async function getCroppedImg(
 
   croppedCanvas.width = props.output.width;
   croppedCanvas.height = props.output.height;
+  croppedCtx.fillStyle = "#fff";
+  croppedCtx.fillRect(0, 0, croppedCanvas.width, croppedCanvas.height);
 
   croppedCtx.drawImage(
     canvas,
