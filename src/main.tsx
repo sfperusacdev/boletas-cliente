@@ -12,6 +12,7 @@ import "react-pdf/dist/esm/Page/AnnotationLayer.css";
 import "react-pdf/dist/esm/Page/TextLayer.css";
 
 import { pdfjs } from "react-pdf";
+import { PWAInstallPrompt } from "./pages/PWAInstallPrompt";
 pdfjs.GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
@@ -20,7 +21,8 @@ const queryClient = new QueryClient({
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <ContextMenuProvider>
-      <Toaster />
+      <Toaster reverseOrder={false} />
+      <PWAInstallPrompt force={import.meta.env.MODE === "development"} />
       <ConfirmModalProvider>
         <QueryClientProvider client={queryClient}>
           <SessionProvider>

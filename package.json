@@ -8,7 +8,9 @@
     "dev0": "vite --host",
     "build": "tsc -b && vite build",
     "lint": "eslint .",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "preview0": "vite preview --host",
+    "generate-pwa-assets": "pwa-assets-generator"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.0.1",
@@ -39,6 +41,7 @@
     "@types/node": "^22.15.3",
     "@types/react": "^19.0.10",
     "@types/react-dom": "^19.0.4",
+    "@vite-pwa/assets-generator": "^1.0.0",
     "@vitejs/plugin-react": "^4.3.4",
     "daisyui": "^5.0.28",
     "eslint": "^9.22.0",
@@ -48,6 +51,7 @@
     "typescript": "~5.7.2",
     "typescript-eslint": "^8.26.1",
     "vite": "^6.3.1",
+    "vite-plugin-pwa": "^1.0.0",
     "vite-plugin-static-copy": "^2.3.1"
   }
 }
