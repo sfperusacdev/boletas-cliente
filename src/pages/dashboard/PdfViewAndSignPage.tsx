@@ -74,6 +74,20 @@ export const PdfViewAndSignPage = () => {
     })();
   }, [pdfname]);
 
+  const onLoadDocumentSuccess = async ({ numPages }: { numPages: number }) => {
+    setNumPages(numPages);
+    if (!pdfname) return;
+    try {
+      await DocumentosService.logOpenPDF({
+        pdf_name: pdfname,
+        access_point: "web",
+        referencia: window.location.href,
+      });
+    } catch {
+      console.error("Failed to log open link:", error);
+    }
+  };
+
   if (loading) return <div className="flex items-center justify-center h-screen">Loading...</div>;
 
   if (error != null)
@@ -115,7 +129,7 @@ export const PdfViewAndSignPage = () => {
       <div className="overflow-auto flex flex-col items-center gap-4 h-full pt-10">
         <Document
           file={pdfFile}
-          onLoadSuccess={({ numPages }) => setNumPages(numPages)}
+          onLoadSuccess={onLoadDocumentSuccess}
           loading="Loading PDF..."
           error="Error while loading PDF"
           className="flex flex-col items-center w-full"

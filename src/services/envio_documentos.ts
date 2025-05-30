@@ -32,4 +32,15 @@ export const DocumentosService = {
       body: { record_codigo: data.codigo, empresa: data.empresa, method: data.metodo, referer: data.referencia },
     });
   },
+  // view document
+  logOpenPDF: async (data: { pdf_name: string; access_point: string; referencia: string }) => {
+    await post({
+      path: "/api/v1/public/_open_document/event",
+      body: {
+        pdf_name: data.pdf_name,
+        access_point: data.access_point,
+        referer: data.referencia,
+      },
+    });
+  },
 };
