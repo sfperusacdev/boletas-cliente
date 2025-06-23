@@ -11,6 +11,7 @@ import Sample from "../pages/Sample";
 import { DocumentosPage } from "../pages/dashboard/DocumentosPage";
 import { EntryPointRedirectLink } from "../pages/EntryPointRedirectLink";
 import { SignatureImport } from "../pages/dashboard/SignatureImport";
+import { LandingPage } from "../pages/landing/LandingPage";
 
 const PrivateRoute = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
@@ -38,6 +39,7 @@ export const AppRoutes = () => {
     <BrowserRouter>
       <Routes>
         {/* Rutas públicas (login, registro, recuperación) */}
+        <Route path="/" element={<LandingPage />} />
         <Route
           path="/login"
           element={

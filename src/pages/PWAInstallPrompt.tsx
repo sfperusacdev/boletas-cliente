@@ -44,7 +44,7 @@ export const PWAInstallPrompt: React.FC<Props> = ({ force = false }) => {
   if (!showPrompt) return null;
 
   return (
-    <div className="fixed top-4 right-4 z-50 w-full max-w-xs">
+    <div className="fixed top-4 right-4 z-[99999] w-full max-w-xs">
       <div className="bg-base-100 border border-base-300 shadow-xl rounded-xl p-4">
         <div className="flex justify-between items-start mb-2">
           <h2 className="font-semibold text-base-content text-sm">Instala esta aplicación</h2>
