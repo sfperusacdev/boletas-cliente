@@ -31,7 +31,7 @@ export const Footer = () => {
 
         <div className="flex flex-col items-center md:items-start">
           <h3 className="text-base font-semibold mb-2">Contáctanos</h3>
-          <p className="text-sm">soporte@sfperusac.com</p>
+          <p className="text-sm">ventas@sfperusac.com</p>
           <p className="text-sm">Lunes a Viernes, 8AM - 7PM</p>
         </div>
       </div>

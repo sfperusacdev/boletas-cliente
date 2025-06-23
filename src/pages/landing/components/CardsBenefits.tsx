@@ -6,7 +6,7 @@ export const CardsBenefits = () => {
   return (
     <section id="beneficios" className="py-16 bg-white">
       <div className="container mx-auto px-4 max-w-6xl text-center">
-        <h2 className="text-3xl font-bold text-gray-800 mb-4 mt-4">
+        <h2 className="text-3xl font-bold text-gray-800 mb-4 mt-7 pt-4">
           BENEFICIOS
         </h2>
         <p className="mt-4 text-lg text-gray-600 mx-auto mb-12">
