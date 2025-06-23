@@ -43,6 +43,8 @@ export const PWAInstallPrompt: React.FC<Props> = ({ force = false }) => {
   };
 
   if (!showPrompt) return null;
+  if (document.location.pathname === "" || document.location.pathname === "/")
+    return null;
 
   return (
     <div className="fixed top-4 right-4 z-[99999] w-full max-w-xs">
