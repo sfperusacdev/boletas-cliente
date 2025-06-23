@@ -7,7 +7,12 @@ interface PasswordFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   registration: UseFormRegisterReturn;
 }
 
-export const PasswordField = ({ label, error, registration, ...props }: PasswordFieldProps) => {
+export const PasswordField = ({
+  label,
+  error,
+  registration,
+  ...props
+}: PasswordFieldProps) => {
   return (
     <div className="flex flex-col space-y-1">
       <label className="font-medium">{label}</label>

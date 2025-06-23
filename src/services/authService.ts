@@ -46,7 +46,10 @@ export const authService = {
   },
 
   recoverAccount: async (dni: string): Promise<{ email: string }> => {
-    return await post<{ email: string }, { dni: string; origin_request: string }>({
+    return await post<
+      { email: string },
+      { dni: string; origin_request: string }
+    >({
       baseUrl: API_IDENTITY_URL,
       path: "/v1/global/users/post/recovery/email",
       body: { dni, origin_request: window.location.origin },

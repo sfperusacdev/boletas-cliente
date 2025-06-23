@@ -44,7 +44,12 @@ export const SignatureImport = () => {
     };
   }, [startDownload]);
 
-  if (loading) return <div className="flex items-center justify-center h-screen">Loading...</div>;
+  if (loading)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Loading...
+      </div>
+    );
   if (error != null)
     return (
       <div className="flex flex-col items-center justify-center h-screen text-red-500">

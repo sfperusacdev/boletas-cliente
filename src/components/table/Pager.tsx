@@ -8,7 +8,12 @@ export interface PagerProps {
   onUpdate: (params: { offset: number; limit: number }) => void;
 }
 
-export const Pager = ({ initialOffset = 0, initialLimit = 1, total, onUpdate }: PagerProps) => {
+export const Pager = ({
+  initialOffset = 0,
+  initialLimit = 1,
+  total,
+  onUpdate,
+}: PagerProps) => {
   const [offset, setOffset] = useState(initialOffset);
   const [limit, setLimit] = useState(initialLimit);
   const [isEditing, setIsEditing] = useState(false);
@@ -22,13 +27,18 @@ export const Pager = ({ initialOffset = 0, initialLimit = 1, total, onUpdate }: 
   useEffect(() => {
     // Manejamos click fuera solo cuando estamos en modo de edición
     const handleClickAway = (event: MouseEvent) => {
-      if (inputRef.current && !inputRef.current.contains(event.target as Node)) {
+      if (
+        inputRef.current &&
+        !inputRef.current.contains(event.target as Node)
+      ) {
         applyInput(); // Aplicamos el valor al hacer click fuera
       }
     };
 
     if (isEditing) {
-      document.addEventListener("mousedown", handleClickAway, { capture: true });
+      document.addEventListener("mousedown", handleClickAway, {
+        capture: true,
+      });
     }
 
     return () => document.removeEventListener("mousedown", handleClickAway); // Cleanup
@@ -111,7 +121,10 @@ export const Pager = ({ initialOffset = 0, initialLimit = 1, total, onUpdate }: 
             onKeyDown={handleInputKeydown}
           />
         ) : (
-          <span className="text-sm border-transparent cursor-pointer" onClick={handleValueClick}>
+          <span
+            className="text-sm border-transparent cursor-pointer"
+            onClick={handleValueClick}
+          >
             {value}
           </span>
         )}
@@ -119,10 +132,20 @@ export const Pager = ({ initialOffset = 0, initialLimit = 1, total, onUpdate }: 
         <span className="text-sm">{total}</span>
       </span>
       <span className="btn-group flex gap-2">
-        <button type="button" className="btn btn-sm" aria-label="Previous" onClick={() => navigate(-1)}>
+        <button
+          type="button"
+          className="btn btn-sm"
+          aria-label="Previous"
+          onClick={() => navigate(-1)}
+        >
           <ChevronLeft />
         </button>
-        <button type="button" className="btn btn-sm" aria-label="Next" onClick={() => navigate(1)}>
+        <button
+          type="button"
+          className="btn btn-sm"
+          aria-label="Next"
+          onClick={() => navigate(1)}
+        >
           <ChevronRight />
         </button>
       </span>

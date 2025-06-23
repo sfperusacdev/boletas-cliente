@@ -43,11 +43,11 @@ export const TableSearchInput: FC<TableSearchInputProps> = ({ onSearch }) => {
             "focus:ring-gray-400",
             "focus:border-gray-400",
             "dark:focus:ring-gray-500",
-            "dark:focus:border-gray-500"
+            "dark:focus:border-gray-500",
           )}
           placeholder="Search..."
           value={searchTerm}
-          onChange={(e) => setSearchTerm(e.target.value)}
+          onChange={e => setSearchTerm(e.target.value)}
           onKeyDown={handleKeyDown}
         />
         <div className="absolute left-3 top-1/2 transform -translate-y-1/2 text-gray-500 dark:text-gray-400">
@@ -58,7 +58,12 @@ export const TableSearchInput: FC<TableSearchInputProps> = ({ onSearch }) => {
             viewBox="0 0 24 24"
             stroke="currentColor"
           >
-            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M10 18l6-6-6-6" />
+            <path
+              strokeLinecap="round"
+              strokeLinejoin="round"
+              strokeWidth="2"
+              d="M10 18l6-6-6-6"
+            />
           </svg>
         </div>
       </div>
@@ -85,7 +90,7 @@ export const TableSearchInput: FC<TableSearchInputProps> = ({ onSearch }) => {
           "focus:ring-gray-400",
           "focus:border-gray-400",
           "dark:focus:ring-gray-500",
-          "dark:focus:border-gray-500"
+          "dark:focus:border-gray-500",
         )}
       >
         <Search />

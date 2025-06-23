@@ -12,10 +12,16 @@ export const TableError = <T,>({
 }) => {
   return (
     <tr>
-      <td colSpan={columns.length} className="p-6 text-center text-red-500 dark:text-red-400">
+      <td
+        colSpan={columns.length}
+        className="p-6 text-center text-red-500 dark:text-red-400"
+      >
         <div>{typeof error === "string" ? error : error.message}</div>
         {onRetry && (
-          <button onClick={onRetry} className="mt-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/80">
+          <button
+            onClick={onRetry}
+            className="mt-2 px-4 py-2 bg-primary text-white rounded-md hover:bg-primary/80"
+          >
             Intentar nuevamente
           </button>
         )}

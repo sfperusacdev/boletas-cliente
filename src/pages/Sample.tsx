@@ -40,7 +40,9 @@ export default function Sample() {
               <Page
                 key={index}
                 pageNumber={index + 1}
-                width={containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth}
+                width={
+                  containerWidth ? Math.min(containerWidth, maxWidth) : maxWidth
+                }
               />
             ))}
           </Document>

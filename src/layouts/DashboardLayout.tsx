@@ -1,6 +1,14 @@
 import { useState } from "react";
 import { Outlet, Link, useLocation } from "react-router-dom";
-import { Home, CheckSquare, UserCog, LogOut, User, Menu, Signature } from "lucide-react";
+import {
+  Home,
+  CheckSquare,
+  UserCog,
+  LogOut,
+  User,
+  Menu,
+  Signature,
+} from "lucide-react";
 import { useSession } from "../hooks/useSession";
 import { useConfirmModal } from "../hooks/useConfirmModal";
 import { useScreenSize } from "../hooks/useScreenSize";
@@ -14,7 +22,10 @@ export const DashboardLayout = () => {
   const [menuOpen, setMenuOpen] = useState(!isMobile);
 
   const handleLogout = async () => {
-    const result = await openModal("Cerrar sesión", "¿Estás seguro de que quieres cerrar sesión?");
+    const result = await openModal(
+      "Cerrar sesión",
+      "¿Estás seguro de que quieres cerrar sesión?",
+    );
     if (result) logout();
   };
 
@@ -26,7 +37,10 @@ export const DashboardLayout = () => {
     <div className="min-h-screen flex flex-col md:grid md:grid-cols-[250px_1fr] bg-base-200">
       {isMobile && (
         <div className="flex items-center justify-between bg-base-100 p-4">
-          <button onClick={() => setMenuOpen(!menuOpen)} className="btn btn-ghost">
+          <button
+            onClick={() => setMenuOpen(!menuOpen)}
+            className="btn btn-ghost"
+          >
             <Menu className="w-6 h-6" />
           </button>
           <div className="text-lg font-bold">Dashboard</div>
@@ -47,8 +61,12 @@ export const DashboardLayout = () => {
               </div>
             )}
             <div className="text-center">
-              <p className="font-semibold text-base md:text-lg">{user?.user_info?.username ?? ""}</p>
-              <p className="text-xs md:text-sm text-base-content/70">{user?.user_info?.first_name ?? ""}</p>
+              <p className="font-semibold text-base md:text-lg">
+                {user?.user_info?.username ?? ""}
+              </p>
+              <p className="text-xs md:text-sm text-base-content/70">
+                {user?.user_info?.first_name ?? ""}
+              </p>
             </div>
           </div>
           <nav className="flex flex-col items-start gap-2">
@@ -63,10 +81,13 @@ export const DashboardLayout = () => {
               to="/dashboard/documentos/firmar"
               onClick={handleLinkClick}
               className={`btn btn-ghost justify-start w-full ${
-                location.pathname === "/dashboard/documentos/firmar" ? "btn-active" : ""
+                location.pathname === "/dashboard/documentos/firmar"
+                  ? "btn-active"
+                  : ""
               }`}
             >
-              <CheckSquare className="w-5 h-5 mr-2" /> <span className="text-start">Documentos por Firmar</span>
+              <CheckSquare className="w-5 h-5 mr-2" />{" "}
+              <span className="text-start">Documentos por Firmar</span>
             </Link>
             <Link
               to="/dashboard/signature"

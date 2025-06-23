@@ -3,11 +3,15 @@ import { joinUrls } from "./url";
 
 describe("joinUrls", () => {
   it("should join basic paths", () => {
-    expect(joinUrls("http://localhost:8014", "api", "users")).toBe("http://localhost:8014/api/users");
+    expect(joinUrls("http://localhost:8014", "api", "users")).toBe(
+      "http://localhost:8014/api/users",
+    );
   });
 
   it("should remove extra slashes", () => {
-    expect(joinUrls("http://localhost:8014/", "/api/", "/users/")).toBe("http://localhost:8014/api/users");
+    expect(joinUrls("http://localhost:8014/", "/api/", "/users/")).toBe(
+      "http://localhost:8014/api/users",
+    );
   });
 
   it("should handle single part", () => {

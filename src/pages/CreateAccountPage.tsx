@@ -20,9 +20,18 @@ const registerSchema = yup.object({
   last_name_materno: stringRequired("Apellido materno requerido"),
   email: emailRequired("Correo requerido"),
   phone: phoneRequired("Debe ser un número de celular válido de 9 dígitos"),
-  gender: stringRequired("Género requerido").oneOf(["f", "m"], "Selecciona un género válido"),
-  new_password: stringRequired().min(8, "La contraseña debe tener al menos 8 caracteres"),
-  confirm_password: stringRequired().oneOf([yup.ref("new_password")], "Las nuevas contraseñas no coinciden"),
+  gender: stringRequired("Género requerido").oneOf(
+    ["f", "m"],
+    "Selecciona un género válido",
+  ),
+  new_password: stringRequired().min(
+    8,
+    "La contraseña debe tener al menos 8 caracteres",
+  ),
+  confirm_password: stringRequired().oneOf(
+    [yup.ref("new_password")],
+    "Las nuevas contraseñas no coinciden",
+  ),
 });
 
 export const CreateAccountPage = () => {
@@ -40,22 +49,32 @@ export const CreateAccountPage = () => {
   });
 
   const goToStop2 = async () => {
-    const isValid = await form.trigger(["first_name", "last_name_materno", "last_name_paterno", "gender"]);
+    const isValid = await form.trigger([
+      "first_name",
+      "last_name_materno",
+      "last_name_paterno",
+      "gender",
+    ]);
     if (isValid) setStep(2);
   };
 
-  const formSubmitHandle = form.handleSubmit((data) => mutation.mutate(data));
+  const formSubmitHandle = form.handleSubmit(data => mutation.mutate(data));
 
   return (
     <div className="flex items-center justify-center min-h-screen bg-base-200 px-4">
       <div className="w-full max-w-md bg-base-100 border border-base-300 shadow-xl rounded-xl p-8 space-y-6">
         <div className="text-center">
           <h2 className="text-3xl font-bold">Crear cuenta</h2>
-          <p className="text-base-content/70 text-sm mt-1">Completa el formulario para registrarte</p>
+          <p className="text-base-content/70 text-sm mt-1">
+            Completa el formulario para registrarte
+          </p>
         </div>
         <div className="flex justify-center">
           <ul className="steps flex">
-            <li className={classNames("step", { "step-primary": step > 0 })} onClick={() => setStep(1)} />
+            <li
+              className={classNames("step", { "step-primary": step > 0 })}
+              onClick={() => setStep(1)}
+            />
             <li className={classNames("step", { "step-primary": step > 1 })} />
           </ul>
         </div>
@@ -88,7 +107,11 @@ export const CreateAccountPage = () => {
               />
 
               <div className="text-center mt-4">
-                <button type="button" onClick={goToStop2} className="btn btn-primary">
+                <button
+                  type="button"
+                  onClick={goToStop2}
+                  className="btn btn-primary"
+                >
                   Siguiente
                 </button>
               </div>
@@ -97,13 +120,21 @@ export const CreateAccountPage = () => {
 
           {step === 2 && (
             <>
-              <InputField label="DNI" registration={form.register("dni")} error={form.formState.errors.dni} />
+              <InputField
+                label="DNI"
+                registration={form.register("dni")}
+                error={form.formState.errors.dni}
+              />
               <InputField
                 label="Correo electrónico"
                 registration={form.register("email")}
                 error={form.formState.errors.email}
               />
-              <InputField label="Teléfono" registration={form.register("phone")} error={form.formState.errors.phone} />
+              <InputField
+                label="Teléfono"
+                registration={form.register("phone")}
+                error={form.formState.errors.phone}
+              />
               <div className="grid grid-cols-2 gap-4">
                 <PasswordField
                   label="Contraseña"

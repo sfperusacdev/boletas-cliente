@@ -13,7 +13,10 @@ import "react-pdf/dist/esm/Page/TextLayer.css";
 
 import { pdfjs } from "react-pdf";
 import { PWAInstallPrompt } from "./pages/PWAInstallPrompt";
-pdfjs.GlobalWorkerOptions.workerSrc = new URL("pdfjs-dist/build/pdf.worker.min.mjs", import.meta.url).toString();
+pdfjs.GlobalWorkerOptions.workerSrc = new URL(
+  "pdfjs-dist/build/pdf.worker.min.mjs",
+  import.meta.url,
+).toString();
 
 const queryClient = new QueryClient({
   defaultOptions: { queries: { refetchOnWindowFocus: false } },
@@ -33,5 +36,5 @@ createRoot(document.getElementById("root")!).render(
         </QueryClientProvider>
       </ConfirmModalProvider>
     </ContextMenuProvider>
-  </StrictMode>
+  </StrictMode>,
 );

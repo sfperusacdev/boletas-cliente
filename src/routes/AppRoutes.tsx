@@ -1,4 +1,10 @@
-import { BrowserRouter, Routes, Route, Navigate, useLocation } from "react-router-dom";
+import {
+  BrowserRouter,
+  Routes,
+  Route,
+  Navigate,
+  useLocation,
+} from "react-router-dom";
 import { ReactNode } from "react";
 import { useSession } from "../hooks/useSession";
 import { LoginPage } from "../pages/LoginPage";
@@ -21,7 +27,11 @@ const PrivateRoute = ({ children }: { children: ReactNode }) => {
   if (location.pathname.startsWith("/_sign/")) {
     state = { from: location.pathname };
   }
-  return isAuthenticated ? children : <Navigate to="/login" replace state={state} />;
+  return isAuthenticated ? (
+    children
+  ) : (
+    <Navigate to="/login" replace state={state} />
+  );
 };
 
 const PublicRoute = ({ children }: { children: ReactNode }) => {
@@ -30,7 +40,8 @@ const PublicRoute = ({ children }: { children: ReactNode }) => {
   const location = useLocation();
   // Si el usuario está autenticado, redirigimos a la página de dashboard
   if (!isAuthenticated) return children;
-  if (location.state?.from) return <Navigate to={location.state.from} replace />;
+  if (location.state?.from)
+    return <Navigate to={location.state.from} replace />;
   return <Navigate to="/dashboard" replace />;
 };
 

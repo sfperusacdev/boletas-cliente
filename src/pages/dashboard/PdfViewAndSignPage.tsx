@@ -2,7 +2,13 @@ import { useEffect, useRef, useState } from "react";
 import { DocumentosService } from "../../services/envio_documentos";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { use100vh } from "react-div-100vh";
-import { ArrowDownToLine, CircleArrowLeft, PencilLine, ZoomIn, ZoomOut } from "lucide-react";
+import {
+  ArrowDownToLine,
+  CircleArrowLeft,
+  PencilLine,
+  ZoomIn,
+  ZoomOut,
+} from "lucide-react";
 import { Document, Page } from "react-pdf";
 import { useScreenSize } from "../../hooks/useScreenSize";
 import { useMutation } from "@tanstack/react-query";
@@ -19,7 +25,10 @@ export const PdfViewAndSignPage = () => {
   height ??= window.innerHeight;
 
   const navigate = useNavigate();
-  const { pdfname: pdfnamePath, estado } = useParams<{ pdfname: string; estado: string }>();
+  const { pdfname: pdfnamePath, estado } = useParams<{
+    pdfname: string;
+    estado: string;
+  }>();
 
   const [pendiente, setDocumentoPendiente] = useState(estado === "published");
   const [pdfname, setPdfName] = useState(pdfnamePath);
@@ -40,7 +49,7 @@ export const PdfViewAndSignPage = () => {
       setPdfName(signed_pdf_name);
       done.current = false;
     },
-    onError: (err) => toast.error(`Error al firmar el documento: ${err.message}`),
+    onError: err => toast.error(`Error al firmar el documento: ${err.message}`),
   });
 
   const handleSignDocument = async () => {
@@ -48,7 +57,10 @@ export const PdfViewAndSignPage = () => {
       alert("No se ha seleccionado ningún documento para firmar.");
       return;
     }
-    const userConfirmed = await openModal("Confirmar Firma", "¿Estás seguro de que deseas firmar este documento?");
+    const userConfirmed = await openModal(
+      "Confirmar Firma",
+      "¿Estás seguro de que deseas firmar este documento?",
+    );
     if (!userConfirmed) return;
     mutation.mutate(pdfname);
   };
@@ -68,7 +80,9 @@ export const PdfViewAndSignPage = () => {
         setPdfFile(new File([pdfBlob], pdfname, { type: "application/pdf" }));
         setLoading(false);
       } catch (err) {
-        setError(err instanceof Error ? err.message : "An unknown error occurred");
+        setError(
+          err instanceof Error ? err.message : "An unknown error occurred",
+        );
         setLoading(false);
       }
     })();
@@ -88,7 +102,12 @@ export const PdfViewAndSignPage = () => {
     }
   };
 
-  if (loading) return <div className="flex items-center justify-center h-screen">Loading...</div>;
+  if (loading)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Loading...
+      </div>
+    );
 
   if (error != null)
     return (
@@ -96,10 +115,18 @@ export const PdfViewAndSignPage = () => {
         Error: {typeof error === "string" ? error : error.message}
       </div>
     );
-  if (pdfFile == null) return <div className="flex items-center justify-center h-screen">Unable to load PDF.</div>;
+  if (pdfFile == null)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Unable to load PDF.
+      </div>
+    );
 
   return (
-    <div className={classNames("w-full relative bg-base-100")} style={{ height: isMobile ? height - 72 : height }}>
+    <div
+      className={classNames("w-full relative bg-base-100")}
+      style={{ height: isMobile ? height - 72 : height }}
+    >
       <div className="absolute bg-black/20 w-full h-10 top-0 flex justify-between items-center px-4 z-10">
         <CircleArrowLeft
           className="w-5 h-5 cursor-pointer select-none"
@@ -113,14 +140,23 @@ export const PdfViewAndSignPage = () => {
         />
 
         <div className="flex items-center gap-2">
-          <button className="btn btn-sm btn-ghost" onClick={() => saveBlob(pdfFile.name, pdfFile)}>
+          <button
+            className="btn btn-sm btn-ghost"
+            onClick={() => saveBlob(pdfFile.name, pdfFile)}
+          >
             <ArrowDownToLine className="w-5 h-5" />
           </button>
           <div className="w-2" />
-          <button className="btn btn-sm btn-ghost" onClick={() => setScale((prev) => Math.min(prev + 0.1, 3))}>
+          <button
+            className="btn btn-sm btn-ghost"
+            onClick={() => setScale(prev => Math.min(prev + 0.1, 3))}
+          >
             <ZoomIn className="w-5 h-5" />
           </button>
-          <button className="btn btn-sm btn-ghost" onClick={() => setScale((prev) => Math.max(prev - 0.1, 0.5))}>
+          <button
+            className="btn btn-sm btn-ghost"
+            onClick={() => setScale(prev => Math.max(prev - 0.1, 0.5))}
+          >
             <ZoomOut className="w-5 h-5" />
           </button>
         </div>
@@ -147,7 +183,11 @@ export const PdfViewAndSignPage = () => {
       </div>
       {pendiente && (
         <div className="absolute bottom-0 h-20 w-full flex justify-center items-center gap-4 z-[9999]">
-          <button className="btn btn-primary flex items-center gap-2" onClick={handleSignDocument} disabled={loading}>
+          <button
+            className="btn btn-primary flex items-center gap-2"
+            onClick={handleSignDocument}
+            disabled={loading}
+          >
             {mutation.isPending ? (
               <div className="spinner-border spinner-border-sm" role="status">
                 <span className="visually-hidden">Firmando...</span>

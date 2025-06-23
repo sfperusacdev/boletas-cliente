@@ -41,5 +41,9 @@ export const SessionProvider = ({ children }: { children: ReactNode }) => {
     localStorage.removeItem("session");
   };
 
-  return <SessionContext.Provider value={{ user, login, logout }}>{children}</SessionContext.Provider>;
+  return (
+    <SessionContext.Provider value={{ user, login, logout }}>
+      {children}
+    </SessionContext.Provider>
+  );
 };

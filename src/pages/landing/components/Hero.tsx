@@ -8,11 +8,13 @@ export const Hero = () => {
         <div className="flex flex-col lg:flex-row items-center justify-between gap-12">
           <div className="w-full lg:w-1/2 text-center lg:text-left animate-fade-in-up animate-delay-200">
             <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold text-gray-900 leading-tight mb-6">
-              Envíos rápidos <br className="hidden md:inline" /> <span className="text-blue-600">Firmas</span> Seguras
+              Envíos rápidos <br className="hidden md:inline" />{" "}
+              <span className="text-blue-600">Firmas</span> Seguras
             </h1>
             <p className="text-lg md:text-xl text-gray-700 mb-8 max-w-lg mx-auto lg:mx-0">
-              Firme, documentos de forma legal y segura desde cualquier lugar y dispositivo. Ahorre tiempo, reduzca el
-              desperdicio de papel y agilice su flujo de trabajo documental.
+              Firme, documentos de forma legal y segura desde cualquier lugar y
+              dispositivo. Ahorre tiempo, reduzca el desperdicio de papel y
+              agilice su flujo de trabajo documental.
             </p>
             <div className="flex flex-col sm:flex-row justify-center lg:justify-start gap-4 mb-10">
               <a
@@ -31,7 +33,12 @@ export const Hero = () => {
               </span>
 
               <div className="flex items-center mb-6 pt-4">
-                <svg className="w-6 h-6 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-6 h-6 text-green-500 mr-2"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -39,17 +46,28 @@ export const Hero = () => {
                     d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"
                   />
                 </svg>
-                <span className="font-medium text-gray-800">Documento listo para firmar</span>
+                <span className="font-medium text-gray-800">
+                  Documento listo para firmar
+                </span>
                 <span className="ml-auto text-gray-500 text-sm">Hoy</span>
               </div>
 
               <div className="bg-gray-50 p-4 rounded-lg mb-6">
-                <h3 className="font-bold text-gray-900 mb-1">Gratificaciones</h3>
-                <p className="text-sm text-gray-600">Por favor revise y firme.</p>
+                <h3 className="font-bold text-gray-900 mb-1">
+                  Gratificaciones
+                </h3>
+                <p className="text-sm text-gray-600">
+                  Por favor revise y firme.
+                </p>
               </div>
 
               <div className="border border-dashed border-gray-300 rounded-lg flex items-center justify-center h-48 bg-gray-50 mb-6">
-                <svg className="w-16 h-16 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <svg
+                  className="w-16 h-16 text-gray-300"
+                  fill="none"
+                  stroke="currentColor"
+                  viewBox="0 0 24 24"
+                >
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"
@@ -60,7 +78,9 @@ export const Hero = () => {
               </div>
 
               <div className="mb-6">
-                <p className="text-sm text-gray-700 font-medium mb-2">Se requiere firma</p>
+                <p className="text-sm text-gray-700 font-medium mb-2">
+                  Se requiere firma
+                </p>
                 <div className="relative p-3 border-2 border-dashed border-blue-300 rounded-lg bg-blue-50 text-center">
                   <span className="absolute top-2 right-2 bg-yellow-100 text-yellow-800 text-xs font-medium px-2 py-1 rounded-full">
                     Tu turno

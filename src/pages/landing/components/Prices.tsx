@@ -3,11 +3,14 @@ export const Prices = () => {
     <section id="precios" className="py-16 bg-white">
       <div className="container mx-auto px-4">
         <div className="text-center mb-12">
-          <h2 className="text-4xl font-bold text-gray-800 mb-4">PLANES DISPONIBLES SEGÚN TUS NECESIDADES</h2>
+          <h2 className="text-4xl font-bold text-gray-800 mb-4">
+            PLANES DISPONIBLES SEGÚN TUS NECESIDADES
+          </h2>
           <p className="text-lg text-gray-600">
-            Nuestra solución se adapta a distintos niveles de operación. Por eso, ofrecemos dos planes claros y
-            flexibles para cubrir desde necesidades básicas de distribución documental, hasta requerimientos avanzados
-            con firma electrónica, trazabilidad y validez legal plena.
+            Nuestra solución se adapta a distintos niveles de operación. Por
+            eso, ofrecemos dos planes claros y flexibles para cubrir desde
+            necesidades básicas de distribución documental, hasta requerimientos
+            avanzados con firma electrónica, trazabilidad y validez legal plena.
           </p>
         </div>
 
@@ -34,8 +37,14 @@ export const Prices = () => {
             price="$25"
             description="Legalidad en la gestión documental, firmas electrónicas, reportes que cumplir con entidades como SUNAFIL y ESSALUD."
             features={[
-              { text: "Almacenamiento: respaldo y trazabilidad", included: true },
-              { text: "Firma del trabajador: Firma Electrónica Simple (FES)", included: true },
+              {
+                text: "Almacenamiento: respaldo y trazabilidad",
+                included: true,
+              },
+              {
+                text: "Firma del trabajador: Firma Electrónica Simple (FES)",
+                included: true,
+              },
               {
                 text: "Firma digital de la empresa: Firma Digital Avanzada (FDA), emitido por un PSC acreditado.",
                 included: true,
@@ -44,8 +53,14 @@ export const Prices = () => {
                 text: "Equivalencia legal: Cumple con la Ley N.º 27269 (Ley de Firmas y Certificados Digitales) y el DS N.º 052-2008-PCM,",
                 included: true,
               },
-              { text: "Usuarios incluidos: hasta 500 Colaboradores", included: true },
-              { text: "Escalabilidad: usuarios adicionales USD 0.05 Colaborador/mes", included: true },
+              {
+                text: "Usuarios incluidos: hasta 500 Colaboradores",
+                included: true,
+              },
+              {
+                text: "Escalabilidad: usuarios adicionales USD 0.05 Colaborador/mes",
+                included: true,
+              },
               { text: "Setup inicial", included: true },
             ]}
             link="https://wa.link/olb1uq"
@@ -85,7 +100,14 @@ interface PlanCardProps {
   highlighted: boolean;
 }
 
-const PlanCard = ({ title, price, description, features, link, highlighted }: PlanCardProps) => {
+const PlanCard = ({
+  title,
+  price,
+  description,
+  features,
+  link,
+  highlighted,
+}: PlanCardProps) => {
   return (
     <div
       className={`bg-white rounded-lg shadow-lg p-8 flex flex-col items-center border ${
@@ -101,8 +123,18 @@ const PlanCard = ({ title, price, description, features, link, highlighted }: Pl
         {features.map((f, idx) => (
           <li key={idx} className="flex items-center text-gray-700">
             {f.included ? (
-              <svg className="w-5 h-5 text-green-500 mr-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M5 13l4 4L19 7" />
+              <svg
+                className="w-5 h-5 text-green-500 mr-2"
+                fill="none"
+                stroke="currentColor"
+                viewBox="0 0 24 24"
+              >
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  strokeWidth="2"
+                  d="M5 13l4 4L19 7"
+                />
               </svg>
             ) : (
               <svg
@@ -112,7 +144,11 @@ const PlanCard = ({ title, price, description, features, link, highlighted }: Pl
                 strokeWidth="1.5"
                 stroke="currentColor"
               >
-                <path strokeLinecap="round" strokeLinejoin="round" d="M6 18 18 6M6 6l12 12" />
+                <path
+                  strokeLinecap="round"
+                  strokeLinejoin="round"
+                  d="M6 18 18 6M6 6l12 12"
+                />
               </svg>
             )}
             {f.text}

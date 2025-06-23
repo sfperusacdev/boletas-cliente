@@ -5,8 +5,9 @@ export const Footer = () => {
         <div className="flex flex-col items-center md:items-start">
           <h2 className="text-lg font-semibold mb-2">NoticicaSF</h2>
           <p className="text-sm">
-            En SOLUCIONES INFORMÁTICAS SF PERÚ S.A.C., estamos comprometidos con brindar tecnología que genere
-            eficiencia, seguridad y cumplimiento legal en los procesos de su organización.
+            En SOLUCIONES INFORMÁTICAS SF PERÚ S.A.C., estamos comprometidos con
+            brindar tecnología que genere eficiencia, seguridad y cumplimiento
+            legal en los procesos de su organización.
           </p>
         </div>
 

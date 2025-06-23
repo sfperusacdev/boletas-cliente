@@ -13,7 +13,9 @@ export const CustomTable = <T,>(props: CustomTableProps<T>) => {
     <div className="relative">
       <div className="relative">
         <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-          {props.title && <h2 className="text-2xl font-semibold">{props.title}</h2>}
+          {props.title && (
+            <h2 className="text-2xl font-semibold">{props.title}</h2>
+          )}
           {props.onSearch && <TableSearchInput onSearch={props.onSearch} />}
         </div>
       </div>

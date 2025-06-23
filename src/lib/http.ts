@@ -23,19 +23,25 @@ const request = async <T, B = unknown>({
   abortSignal,
   fullResponse = false,
 }: RequestOptions<B>): Promise<T> => {
-  const response = await customFetch(joinUrls(baseUrl ?? API_BOLETAS_URL, path), {
-    method,
-    headers: {
-      "Content-Type": "application/json",
+  const response = await customFetch(
+    joinUrls(baseUrl ?? API_BOLETAS_URL, path),
+    {
+      method,
+      headers: {
+        "Content-Type": "application/json",
+      },
+      ...(body ? { body: JSON.stringify(body) } : {}),
+      signal: abortSignal,
     },
-    ...(body ? { body: JSON.stringify(body) } : {}),
-    signal: abortSignal,
-  });
+  );
 
   const decoded = await response.json();
 
   if (!response.ok) {
-    const message = typeof decoded?.message === "string" ? decoded.message : "Unexpected error";
+    const message =
+      typeof decoded?.message === "string"
+        ? decoded.message
+        : "Unexpected error";
     // if (message.includes("[close]")) emmitCloseSession(); // TODO
     throw new ApiError(message);
   }
@@ -54,18 +60,24 @@ export const download = async <B>(options: {
   progress: (progress: number) => void;
 }) => {
   try {
-    const response = await customFetch(joinUrls(options.baseUrl ?? API_BOLETAS_URL, options.path), {
-      method: options.method ?? "GET",
-      headers: {
-        "Content-Type": "application/json",
+    const response = await customFetch(
+      joinUrls(options.baseUrl ?? API_BOLETAS_URL, options.path),
+      {
+        method: options.method ?? "GET",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        ...(options.body ? { body: JSON.stringify(options.body) } : {}),
+        signal: options.abortSignal,
       },
-      ...(options.body ? { body: JSON.stringify(options.body) } : {}),
-      signal: options.abortSignal,
-    });
+    );
 
     if (!response.ok) {
       const decoded = await response.json();
-      const message = typeof decoded?.message === "string" ? decoded.message : "Unexpected error";
+      const message =
+        typeof decoded?.message === "string"
+          ? decoded.message
+          : "Unexpected error";
       // if (message.includes("[close]")) emmitCloseSession(); // TODO
       throw new ApiError(message);
     }
@@ -73,7 +85,9 @@ export const download = async <B>(options: {
     const body = response.body;
     if (!body) throw new ApiError("Archivo no encontrado");
     const reader = body.getReader();
-    const contentLength = parseInt(response.headers.get("Content-Length") ?? "");
+    const contentLength = parseInt(
+      response.headers.get("Content-Length") ?? "",
+    );
     let receivedLength = 0;
     const chunks: Uint8Array[] = [];
     while (true) {
@@ -91,16 +105,20 @@ export const download = async <B>(options: {
   }
 };
 
-export const get = <T>(options: Omit<RequestOptions, "method" | "body">) => request<T>({ ...options, method: "GET" });
+export const get = <T>(options: Omit<RequestOptions, "method" | "body">) =>
+  request<T>({ ...options, method: "GET" });
 
-export const post = <T, B = unknown>(options: Omit<RequestOptions<B>, "method">) =>
-  request<T, B>({ ...options, method: "POST" });
+export const post = <T, B = unknown>(
+  options: Omit<RequestOptions<B>, "method">,
+) => request<T, B>({ ...options, method: "POST" });
 
-export const put = <T, B = unknown>(options: Omit<RequestOptions<B>, "method">) =>
-  request<T, B>({ ...options, method: "PUT" });
+export const put = <T, B = unknown>(
+  options: Omit<RequestOptions<B>, "method">,
+) => request<T, B>({ ...options, method: "PUT" });
 
-export const patch = <T, B = unknown>(options: Omit<RequestOptions<B>, "method">) =>
-  request<T, B>({ ...options, method: "PATCH" });
+export const patch = <T, B = unknown>(
+  options: Omit<RequestOptions<B>, "method">,
+) => request<T, B>({ ...options, method: "PATCH" });
 
 export const del = <T>(options: Omit<RequestOptions, "method" | "body">) =>
   request<T>({ ...options, method: "DELETE" });
@@ -113,12 +131,18 @@ export const postFromData = async ({
   body,
   method = "POST",
   abortSignal,
-}: Omit<RequestOptions, "method"> & { body: FormData; method?: "POST" | "PUT" }): Promise<unknown> => {
-  const response = await customFetch(joinUrls(baseUrl ?? API_BOLETAS_URL, path), {
-    method,
-    body,
-    signal: abortSignal,
-  });
+}: Omit<RequestOptions, "method"> & {
+  body: FormData;
+  method?: "POST" | "PUT";
+}): Promise<unknown> => {
+  const response = await customFetch(
+    joinUrls(baseUrl ?? API_BOLETAS_URL, path),
+    {
+      method,
+      body,
+      signal: abortSignal,
+    },
+  );
 
   const decoded = await response.json();
   if (!response.ok) {

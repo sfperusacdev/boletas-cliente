@@ -8,11 +8,22 @@ interface InputFieldProps extends InputHTMLAttributes<HTMLInputElement> {
   registration: UseFormRegisterReturn;
 }
 
-export const InputField = ({ label, error, registration, placeholder, ...props }: InputFieldProps) => {
+export const InputField = ({
+  label,
+  error,
+  registration,
+  placeholder,
+  ...props
+}: InputFieldProps) => {
   return (
     <div className="flex flex-col space-y-1">
       <label className="font-medium">{label}</label>
-      <input {...registration} {...props} className="input input-bordered w-full" placeholder={placeholder} />
+      <input
+        {...registration}
+        {...props}
+        className="input input-bordered w-full"
+        placeholder={placeholder}
+      />
       {error && <p className="text-xs text-error mt-1">{error.message}</p>}
     </div>
   );

@@ -8,7 +8,9 @@ import toast from "react-hot-toast";
 import { RotateCcw, RotateCw } from "lucide-react";
 
 type Mode = "view" | "crop";
-export const SignatureImportView: FC<{ image: string | null }> = ({ image }) => {
+export const SignatureImportView: FC<{ image: string | null }> = ({
+  image,
+}) => {
   const inputRef = useRef<HTMLInputElement>(null);
   const [loading, setLoadingUpload] = useState(false);
   const [mode, setMode] = useState<Mode>("view");
@@ -40,9 +42,14 @@ export const SignatureImportView: FC<{ image: string | null }> = ({ image }) => 
   const handleSave = async () => {
     if (!selectedImage || !croppedAreaPixels) return;
 
-    const croppedBlob = await getCroppedImg(selectedImage, croppedAreaPixels, rotation, {
-      output: { width: 860, height: 860 / 2 },
-    });
+    const croppedBlob = await getCroppedImg(
+      selectedImage,
+      croppedAreaPixels,
+      rotation,
+      {
+        output: { width: 860, height: 860 / 2 },
+      },
+    );
 
     if (croppedBlob == null) {
       toast.error("no se pudo procesar la imange");
@@ -56,7 +63,12 @@ export const SignatureImportView: FC<{ image: string | null }> = ({ image }) => 
       setMode("view");
       toast.success("Firma guardada correctamente", { id });
     } catch (e) {
-      const message = typeof e === "string" ? e : e instanceof Error ? e.message : "Error al guardar la firma";
+      const message =
+        typeof e === "string"
+          ? e
+          : e instanceof Error
+            ? e.message
+            : "Error al guardar la firma";
       toast.error(message, { id });
     } finally {
       setLoadingUpload(false);
@@ -67,7 +79,8 @@ export const SignatureImportView: FC<{ image: string | null }> = ({ image }) => 
     <div className="w-full h-full px-5 py-8 flex flex-col items-center">
       <h1 className="text-2xl font-bold mb-6">Firma</h1>
       <p className="text-sm text-muted-foreground text-center max-w-[860px] mb-4">
-        Esta imagen será utilizada como firma visual en los documentos que firmes digitalmente desde el sistema.
+        Esta imagen será utilizada como firma visual en los documentos que
+        firmes digitalmente desde el sistema.
       </p>
 
       {mode === "view" && (
@@ -85,7 +98,7 @@ export const SignatureImportView: FC<{ image: string | null }> = ({ image }) => 
                 "absolute inset-0",
                 "flex items-center justify-center",
                 "transition duration-200",
-                "cursor-pointer"
+                "cursor-pointer",
               )}
             />
             <input
@@ -98,7 +111,10 @@ export const SignatureImportView: FC<{ image: string | null }> = ({ image }) => 
             />
           </div>
           <div className="pt-8 flex justify-center">
-            <button className="btn btn-primary" onClick={() => inputRef.current?.click()}>
+            <button
+              className="btn btn-primary"
+              onClick={() => inputRef.current?.click()}
+            >
               Subir Firma
             </button>
           </div>
@@ -136,23 +152,31 @@ export const SignatureImportView: FC<{ image: string | null }> = ({ image }) => 
           <div className="flex flex-col gap-3">
             <div className="grid xl:grid-cols-2 items-center gap-4">
               <div className="flex flex-col">
-                <label className="text-sm font-medium mb-2">Zoom: {zoom.toFixed(1)}x</label>
+                <label className="text-sm font-medium mb-2">
+                  Zoom: {zoom.toFixed(1)}x
+                </label>
                 <input
                   type="range"
                   min={1}
                   max={3}
                   step={0.1}
                   value={zoom}
-                  onChange={(e) => setZoom(parseFloat(e.target.value))}
+                  onChange={e => setZoom(parseFloat(e.target.value))}
                   className="w-full range range-sm range-primary"
                 />
               </div>
               <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                <button className="btn btn-outline" onClick={() => setRotation((r) => r - 90)}>
+                <button
+                  className="btn btn-outline"
+                  onClick={() => setRotation(r => r - 90)}
+                >
                   <RotateCcw className="w-4 h-4 mr-2" />
                   <span> Rotar Izquierda</span>
                 </button>
-                <button className="btn btn-outline" onClick={() => setRotation((r) => r + 90)}>
+                <button
+                  className="btn btn-outline"
+                  onClick={() => setRotation(r => r + 90)}
+                >
                   <RotateCw className="w-4 h-4 mr-2" />
                   <span> Rotar Derecha</span>
                 </button>
@@ -163,7 +187,11 @@ export const SignatureImportView: FC<{ image: string | null }> = ({ image }) => 
               <button className="btn btn-ghost" onClick={() => setMode("view")}>
                 Cancelar
               </button>
-              <button className="btn btn-primary disabled:opacity-50" onClick={handleSave} disabled={loading}>
+              <button
+                className="btn btn-primary disabled:opacity-50"
+                onClick={handleSave}
+                disabled={loading}
+              >
                 {loading ? "Guardando..." : "Guardar"}
               </button>
             </div>

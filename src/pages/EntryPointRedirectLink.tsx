@@ -7,11 +7,22 @@ type QryPrms = { empresa: string; record_codigo: string; origin: string };
 export const EntryPointRedirectLink = () => {
   const { empresa, origin, record_codigo } = useParams<QryPrms>();
 
-  if (empresa == null || origin == null || record_codigo == null) return <Navigate to={"/dashboard"} replace />;
-  return <EntryPointRedirect empresa={empresa} origin={origin} record_codigo={record_codigo} />;
+  if (empresa == null || origin == null || record_codigo == null)
+    return <Navigate to={"/dashboard"} replace />;
+  return (
+    <EntryPointRedirect
+      empresa={empresa}
+      origin={origin}
+      record_codigo={record_codigo}
+    />
+  );
 };
 
-const EntryPointRedirect: FC<QryPrms> = ({ empresa, origin, record_codigo }) => {
+const EntryPointRedirect: FC<QryPrms> = ({
+  empresa,
+  origin,
+  record_codigo,
+}) => {
   // region log
   const logdone = useRef(false);
   useEffect(() => {
@@ -36,16 +47,22 @@ const EntryPointRedirect: FC<QryPrms> = ({ empresa, origin, record_codigo }) => 
   // region data
   const queryKey = useMemo(
     () => ["RESUMEN_INFO_DOC_RECORD", empresa, origin, record_codigo],
-    [empresa, origin, record_codigo]
+    [empresa, origin, record_codigo],
   );
   const queryClient = useQueryClient();
   const { data, error, isLoading } = useQuery({
     queryKey: queryKey,
-    queryFn: ({ signal }) => DocumentosService.getDocumentoResumen(empresa, record_codigo, signal),
+    queryFn: ({ signal }) =>
+      DocumentosService.getDocumentoResumen(empresa, record_codigo, signal),
   });
   const onRetry = () => queryClient.invalidateQueries({ queryKey });
 
-  if (isLoading) return <div className="flex items-center justify-center h-screen">Loading...</div>;
+  if (isLoading)
+    return (
+      <div className="flex items-center justify-center h-screen">
+        Loading...
+      </div>
+    );
   if (error != null)
     return (
       <div className="flex flex-col items-center justify-center h-screen text-red-500">
@@ -59,15 +76,26 @@ const EntryPointRedirect: FC<QryPrms> = ({ empresa, origin, record_codigo }) => 
       </div>
     );
 
-  if (data == null || data.length === 0) return <Navigate to={"/dashboard"} replace />;
+  if (data == null || data.length === 0)
+    return <Navigate to={"/dashboard"} replace />;
   if (data[0].signed_pdf_name) {
     return (
-      <Navigate to={`/dashboard/pdf/${data[0].signed_pdf_name}/${data[0].estado}`} replace state={{ from: "_link" }} />
+      <Navigate
+        to={`/dashboard/pdf/${data[0].signed_pdf_name}/${data[0].estado}`}
+        replace
+        state={{ from: "_link" }}
+      />
     );
   }
 
   if (data[0].nombre_pdf)
-    return <Navigate to={`/dashboard/pdf/${data[0].nombre_pdf}/${data[0].estado}`} replace state={{ from: "_link" }} />;
+    return (
+      <Navigate
+        to={`/dashboard/pdf/${data[0].nombre_pdf}/${data[0].estado}`}
+        replace
+        state={{ from: "_link" }}
+      />
+    );
   return (
     <div className="flex flex-col items-center justify-center h-screen text-red-500">
       <button

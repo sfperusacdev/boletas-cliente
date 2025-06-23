@@ -9,7 +9,10 @@ export const readToken = (): string | null => {
   return token;
 };
 
-export const customFetch = async (input: RequestInfo | URL, init?: RequestInit): Promise<Response> => {
+export const customFetch = async (
+  input: RequestInfo | URL,
+  init?: RequestInit,
+): Promise<Response> => {
   try {
     const token = readToken();
     const response = await fetch(input, {

@@ -12,7 +12,10 @@ const loginSchema = object({
   username: stringRequired("DNI requerido")
     .min(7, "El DNI debe tener al menos 7 caracteres")
     .max(10, "El DNI no debe superar los 10 caracteres"),
-  password: stringRequired("Contraseña requerida").min(6, "La contraseña debe tener al menos 6 caracteres"),
+  password: stringRequired("Contraseña requerida").min(
+    6,
+    "La contraseña debe tener al menos 6 caracteres",
+  ),
 });
 
 export const LoginPage = () => {
@@ -20,7 +23,7 @@ export const LoginPage = () => {
 
   const mutation = useMutation({
     mutationFn: authService.login,
-    onSuccess: (data) => login(data),
+    onSuccess: data => login(data),
     onError: () => toast.error("Error al iniciar sesión"),
   });
 
@@ -40,7 +43,9 @@ export const LoginPage = () => {
       <div className="w-full max-w-sm bg-base-100 border border-base-300 shadow-xl rounded-xl p-8 space-y-6">
         <div className="text-center">
           <h2 className="text-3xl font-bold">Iniciar sesión</h2>
-          <p className="text-base-content/70 text-sm mt-1">Ingresa tus credenciales para continuar</p>
+          <p className="text-base-content/70 text-sm mt-1">
+            Ingresa tus credenciales para continuar
+          </p>
         </div>
 
         <form onSubmit={onSubmit} className="space-y-5">
@@ -55,7 +60,9 @@ export const LoginPage = () => {
               {...form.register("username")}
             />
             {form.formState.errors.username && (
-              <p className="text-error text-xs mt-1">{form.formState.errors.username.message}</p>
+              <p className="text-error text-xs mt-1">
+                {form.formState.errors.username.message}
+              </p>
             )}
           </div>
 
@@ -70,11 +77,17 @@ export const LoginPage = () => {
               {...form.register("password")}
             />
             {form.formState.errors.password && (
-              <p className="text-error text-xs mt-1">{form.formState.errors.password.message}</p>
+              <p className="text-error text-xs mt-1">
+                {form.formState.errors.password.message}
+              </p>
             )}
           </div>
 
-          <button type="submit" className="btn btn-primary btn-block" disabled={form.formState.isSubmitting}>
+          <button
+            type="submit"
+            className="btn btn-primary btn-block"
+            disabled={form.formState.isSubmitting}
+          >
             {mutation.isPending ? "Iniciando..." : "Iniciar"}
           </button>
         </form>

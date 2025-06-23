@@ -7,4 +7,6 @@ interface SessionContextType {
   logout: () => void;
 }
 
-export const SessionContext = createContext<SessionContextType | undefined>(undefined);
+export const SessionContext = createContext<SessionContextType | undefined>(
+  undefined,
+);

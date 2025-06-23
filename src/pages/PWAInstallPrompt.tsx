@@ -20,7 +20,8 @@ export const PWAInstallPrompt: React.FC<Props> = ({ force = false }) => {
 
     if (!force) {
       window.addEventListener("beforeinstallprompt", handlePrompt);
-      return () => window.removeEventListener("beforeinstallprompt", handlePrompt);
+      return () =>
+        window.removeEventListener("beforeinstallprompt", handlePrompt);
     } else {
       setShowPrompt(true);
     }
@@ -47,12 +48,19 @@ export const PWAInstallPrompt: React.FC<Props> = ({ force = false }) => {
     <div className="fixed top-4 right-4 z-[99999] w-full max-w-xs">
       <div className="bg-base-100 border border-base-300 shadow-xl rounded-xl p-4">
         <div className="flex justify-between items-start mb-2">
-          <h2 className="font-semibold text-base-content text-sm">Instala esta aplicación</h2>
-          <button onClick={dismissPrompt} className="btn btn-xs btn-circle btn-ghost">
+          <h2 className="font-semibold text-base-content text-sm">
+            Instala esta aplicación
+          </h2>
+          <button
+            onClick={dismissPrompt}
+            className="btn btn-xs btn-circle btn-ghost"
+          >
             ✕
           </button>
         </div>
-        <p className="text-sm text-base-content/80 mb-4">Instala la app para un acceso más rápido y cómodo</p>
+        <p className="text-sm text-base-content/80 mb-4">
+          Instala la app para un acceso más rápido y cómodo
+        </p>
         <button onClick={installPWA} className="btn btn-primary btn-sm w-full">
           Instalar
         </button>

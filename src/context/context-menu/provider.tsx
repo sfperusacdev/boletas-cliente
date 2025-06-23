@@ -1,7 +1,15 @@
 import { useCallback, useEffect, useState } from "react";
-import { ContextMenuContext, ContextMenuItem, ContextMenuState } from "./context";
+import {
+  ContextMenuContext,
+  ContextMenuItem,
+  ContextMenuState,
+} from "./context";
 
-export const ContextMenuProvider = ({ children }: { children: React.ReactNode }) => {
+export const ContextMenuProvider = ({
+  children,
+}: {
+  children: React.ReactNode;
+}) => {
   const [state, setState] = useState<ContextMenuState>({
     isOpen: false,
     x: 0,
@@ -10,7 +18,11 @@ export const ContextMenuProvider = ({ children }: { children: React.ReactNode })
   });
 
   const openContextMenu = useCallback(
-    <T,>(e: React.MouseEvent | React.TouchEvent, items: ContextMenuItem<T>[], data: T) => {
+    <T,>(
+      e: React.MouseEvent | React.TouchEvent,
+      items: ContextMenuItem<T>[],
+      data: T,
+    ) => {
       e.preventDefault();
 
       let clientX = 0;
@@ -49,11 +61,11 @@ export const ContextMenuProvider = ({ children }: { children: React.ReactNode })
         data,
       });
     },
-    []
+    [],
   );
 
   const closeContextMenu = useCallback(() => {
-    setState((prev) => ({ ...prev, isOpen: false }));
+    setState(prev => ({ ...prev, isOpen: false }));
   }, []);
 
   useEffect(() => {
@@ -69,13 +81,15 @@ export const ContextMenuProvider = ({ children }: { children: React.ReactNode })
   }, [closeContextMenu]);
 
   return (
-    <ContextMenuContext.Provider value={{ openContextMenu, closeContextMenu, state }}>
+    <ContextMenuContext.Provider
+      value={{ openContextMenu, closeContextMenu, state }}
+    >
       {children}
       {state.isOpen && (
         <div
           className="absolute  min-w-[180px] rounded-md shadow-md border border-base-300 bg-base-100 text-base-content z-50 overflow-hidden"
           style={{ top: state.y, left: state.x }}
-          onClick={(e) => e.stopPropagation()}
+          onClick={e => e.stopPropagation()}
         >
           {state.items.map((item, index) => {
             const IconComponent = item.icon;
@@ -89,11 +103,17 @@ export const ContextMenuProvider = ({ children }: { children: React.ReactNode })
                   closeContextMenu();
                 }}
                 className={`flex items-center gap-2 w-full text-left px-4 py-2 text-sm ${
-                  isDisabled ? "cursor-not-allowed text-base-content/50 hover:bg-transparent" : "hover:bg-base-200"
+                  isDisabled
+                    ? "cursor-not-allowed text-base-content/50 hover:bg-transparent"
+                    : "hover:bg-base-200"
                 }`}
                 disabled={isDisabled}
               >
-                {IconComponent && <IconComponent className={`w-4 h-4 ${isDisabled ? "opacity-50" : ""}`} />}
+                {IconComponent && (
+                  <IconComponent
+                    className={`w-4 h-4 ${isDisabled ? "opacity-50" : ""}`}
+                  />
+                )}
                 <span className="select-none">{item.label}</span>
               </button>
             );

@@ -1,7 +1,9 @@
 import { createContext, RefAttributes, ForwardRefExoticComponent } from "react";
 import { LucideProps } from "lucide-react";
 
-type Icon = ForwardRefExoticComponent<Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>>;
+type Icon = ForwardRefExoticComponent<
+  Omit<LucideProps, "ref"> & RefAttributes<SVGSVGElement>
+>;
 
 export type ContextMenuItem<T = unknown> = {
   label: string;
@@ -19,7 +21,11 @@ export type ContextMenuState<T = unknown> = {
 };
 
 export const ContextMenuContext = createContext<{
-  openContextMenu: <T>(e: React.MouseEvent | React.TouchEvent, items: ContextMenuItem<T>[], data: T) => void;
+  openContextMenu: <T>(
+    e: React.MouseEvent | React.TouchEvent,
+    items: ContextMenuItem<T>[],
+    data: T,
+  ) => void;
   closeContextMenu: () => void;
   state: ContextMenuState<unknown>;
 } | null>(null);

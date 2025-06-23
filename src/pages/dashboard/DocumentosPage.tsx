@@ -22,7 +22,7 @@ const mesMap: { [key: string]: string } = {
   "12": "Diciembre",
 };
 
-const columns = buildTableColumns<DocumentoDto>((helper) => {
+const columns = buildTableColumns<DocumentoDto>(helper => {
   return [
     helper.accessor("empresa_descripcion", {
       header: "Empresa",
@@ -92,10 +92,12 @@ const columns = buildTableColumns<DocumentoDto>((helper) => {
 
 export const DocumentosPage: FC<{ tosign?: boolean }> = ({ tosign }) => {
   const navigate = useNavigate();
-  const { documentos, isFetching, error, refresh } = useDocumentos(tosign ? "01" : "02");
+  const { documentos, isFetching, error, refresh } = useDocumentos(
+    tosign ? "01" : "02",
+  );
 
   const data = useMemo(() => {
-    if (tosign) return documentos.filter((d) => d.estado == "published");
+    if (tosign) return documentos.filter(d => d.estado == "published");
     return documentos;
   }, [tosign, documentos]);
 
@@ -111,7 +113,7 @@ export const DocumentosPage: FC<{ tosign?: boolean }> = ({ tosign }) => {
         columns={columns}
         data={filteredData}
         onSearch={setFilter}
-        contextMenuAcctions={(row) => [
+        contextMenuAcctions={row => [
           {
             label: "Ver Documeto",
             onClick: () => {
@@ -126,7 +128,7 @@ export const DocumentosPage: FC<{ tosign?: boolean }> = ({ tosign }) => {
             },
           },
         ]}
-        onRowDoubleClick={(row) => {
+        onRowDoubleClick={row => {
           if (row.signed_pdf_name) {
             navigate(`/dashboard/pdf/${row.signed_pdf_name}/${row.estado}`);
             return;

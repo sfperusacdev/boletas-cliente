@@ -6,13 +6,15 @@ export const ConfirmModalProvider = ({ children }: { children: ReactNode }) => {
   const [isOpen, setIsOpen] = useState(false);
   const [resolve, setResolve] = useState<(value: boolean) => void>(() => {});
   const [title, setTitle] = useState<string>("Confirmación");
-  const [message, setMessage] = useState<string>("¿Estás seguro de esta acción?");
+  const [message, setMessage] = useState<string>(
+    "¿Estás seguro de esta acción?",
+  );
 
   const openModal = (title: string, message: string): Promise<boolean> => {
     setIsOpen(true);
     setTitle(title);
     setMessage(message);
-    return new Promise((res) => setResolve(() => res));
+    return new Promise(res => setResolve(() => res));
   };
 
   const closeModal = () => {
