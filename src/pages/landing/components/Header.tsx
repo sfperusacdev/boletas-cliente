@@ -67,14 +67,14 @@ export const Header = () => {
           >
             Contáctanos
           </a>
-          <button
+          {/* <button
             onClick={() => {
               window.open("https://notificasf.com/login", "_blank", "noopener,noreferrer");
             }}
             className="button-componen w-full md:w-auto text-center bg-[#0d263b] text-white rounded-md px-4 py-2 hover:bg-[#417c3f] transition"
           >
             Iniciar Sesión
-          </button>
+          </button> */}
         </div>
       </nav>
     </header>
