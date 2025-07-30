@@ -63,10 +63,18 @@ export const Header = () => {
             href="https://wa.link/am97ka"
             target="_blank"
             rel="noopener noreferrer"
-            className="button-componen w-full md:w-auto text-center bg-[#0d263b] text-white rounded-md px-4 py-2 hover:bg-[#417c3f] transition"
+            className="button-componen w-full md:w-auto text-center text-black rounded-md px-4 py-2 transition"
           >
             Contáctanos
           </a>
+          <button
+            onClick={() => {
+              window.open("https://notificasf.com/login", "_blank", "noopener,noreferrer");
+            }}
+            className="button-componen w-full md:w-auto text-center bg-[#0d263b] text-white rounded-md px-4 py-2 hover:bg-[#417c3f] transition"
+          >
+            Iniciar Sesión
+          </button>
         </div>
       </nav>
     </header>

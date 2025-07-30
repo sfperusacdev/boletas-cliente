@@ -20,8 +20,8 @@ export default defineConfig({
       manifest: {
         start_url: ".",
         display: "standalone",
-        name: "Boletas SF",
-        short_name: "Boletas",
+        name: "NotificaSF",
+        short_name: "NotificaSF",
         description: "Aplicativo de boletas y documentos",
         theme_color: "#ffffff",
         lang: "es",
